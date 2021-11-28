@@ -21,7 +21,33 @@ const Home = () => {
     <GameList>
       <h2>Upcoming Games</h2>
       <Games>
-        {popular.map(game => (
+        {upcoming.map((game) => (
+          <Game
+            key={game.id}
+            id={game.id}
+            name={game.name}
+            released={game.released}
+            image={game.background_image}
+          />
+        ))}
+      </Games>
+      
+      <h2>Popular Games</h2>
+      <Games>
+        {popular.map((game) => (
+          <Game
+            key={game.id}
+            id={game.id}
+            name={game.name}
+            released={game.released}
+            image={game.background_image}
+          />
+        ))}
+      </Games>
+
+      <h2>New Games</h2>
+      <Games>
+        {newGames.map((game) => (
           <Game
             key={game.id}
             id={game.id}
@@ -38,7 +64,7 @@ const Home = () => {
 const GameList = styled(motion.div)`
   padding: 0 5rem;
   h2 {
-    padding: 5rem 0;
+    padding: 5rem 0rem 5rem 2rem;
   }
 `;
 const Games = styled(motion.div)`
