@@ -5,38 +5,42 @@ import { motion } from "framer-motion";
 import { useSelector } from "react-redux";
 
 const GameDetail = () => {
-  const {game, screen } = useSelector((state) => state.detail);
+  const {game, screen, isLoading } = useSelector((state) => state.detail);
 
   return (
-    <CardShadow>
-      <Detail>
-        <Stats>
-          <div className="rating">
-            <h3>{game.name}</h3>
-            <p>Rating: {game.rating}</p>
+    <>
+    { !isLoading && (
+      <CardShadow>
+        <Detail>
+          <Stats>
+            <div className="rating">
+              <h3>{game.name}</h3>
+              <p>Rating: {game.rating}</p>
+            </div>
+            <Info>
+              <h3>Platforms</h3>
+              <Platforms>
+                {game.platforms.map(data => (
+                  <h3 key={data.platform.id}>{data.platform.name}</h3>
+                ))}
+              </Platforms>
+            </Info>
+          </Stats>
+          <Media>
+            <img src={game.background_image} alt={game.slug} />
+          </Media>
+          <div className="description">
+            <p>{game.description_raw}</p>
           </div>
-          <Info>
-            <h3>Platforms</h3>
-            <Platforms>
-              {game.platforms.map(data => (
-                <h3 key={data.platform.id}>{data.platform.name}</h3>
-              ))}
-            </Platforms>
-          </Info>
-        </Stats>
-        <Media>
-          <img src={game.background_image} alt={game.slug} />
-        </Media>
-        <div className="description">
-          <p>{game.description_raw}</p>
-        </div>
-        <div className="gallery">
-          {screen.results.map(screenEl => (
-            <img src={screenEl.image} alt="screen" key={screenEl.id} />
-          ))}
-        </div>
-      </Detail>
-    </CardShadow>
+          <div className="gallery">
+            {screen.results.map(screenEl => (
+              <img src={screenEl.image} alt="screen" key={screenEl.id} />
+            ))}
+          </div>
+        </Detail>
+      </CardShadow>
+    )}
+    </>
   );
 };
 
