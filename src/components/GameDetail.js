@@ -1,3 +1,4 @@
+import { imageResize } from "../util";
 // Styling, Animation
 import styled from "styled-components";
 import { motion } from "framer-motion";
@@ -37,7 +38,7 @@ const GameDetail = () => {
             </Info>
           </Stats>
           <Media>
-            <img src={game.background_image} alt={game.slug} />
+            <img src={imageResize(game.background_image, 1280)} alt={game.slug} />
           </Media>
           <div className="description">
             <p>{game.description_raw}</p>

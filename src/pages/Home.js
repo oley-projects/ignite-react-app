@@ -35,6 +35,7 @@ const Home = () => {
             released={game.released}
             image={game.background_image}
           />
+
         ))}
       </Games>
       
