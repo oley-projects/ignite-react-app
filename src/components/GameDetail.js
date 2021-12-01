@@ -5,7 +5,7 @@ import { motion } from "framer-motion";
 import { useNavigate }  from "react-router-dom";
 import { useSelector } from "react-redux";
 
-const GameDetail = () => {
+const GameDetail = ({ pathID }) => {
   const navigate = useNavigate();
   // Exit Detail
   const exitDetailHandler = (e) => {
@@ -22,10 +22,10 @@ const GameDetail = () => {
     <>
     { !isLoading && (
       <CardShadow className="shadow" onClick={exitDetailHandler}>
-        <Detail>
+        <Detail layoutId={pathID}>
           <Stats>
             <div className="rating">
-              <h3>{game.name}</h3>
+              <motion.h3 layoutId={`title ${pathID}`}>{game.name}</motion.h3>
               <p>Rating: {game.rating}</p>
             </div>
             <Info>
@@ -38,7 +38,7 @@ const GameDetail = () => {
             </Info>
           </Stats>
           <Media>
-            <img src={imageResize(game.background_image, 1280)} alt={game.slug} />
+            <motion.img layoutId={`image ${pathID}`} src={imageResize(game.background_image, 1280)} alt={game.slug} />
           </Media>
           <div className="description">
             <p>{game.description_raw}</p>
