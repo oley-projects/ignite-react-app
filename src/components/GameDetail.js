@@ -11,6 +11,10 @@ import playstation from "../img/playstation.svg"
 import steam from "../img/steam.svg"
 import xbox from "../img/xbox.svg"
 import gamepad from "../img/gamepad.svg"
+// Star Images
+import starEmpty from "../img/star-empty.svg";
+import starFull from "../img/star-full.svg";
+import StarVariable from "./StarVariable";
 
 const GameDetail = ({ pathID }) => {
   const navigate = useNavigate();
@@ -23,6 +27,26 @@ const GameDetail = ({ pathID }) => {
       navigate("/");
     }
   };
+  // Get Stars
+  const getStars = () => {
+    const stars = [];
+    const rating = game.rating;
+    const ratingWhole = Math.floor(rating);
+    const ratingCeil = Math.ceil(rating);
+    const ratingPercentage = `${Math.floor((rating - ratingWhole) * 100)}%`;
+    for (let i = 0; i < 5; i++) {
+      if(i < ratingWhole) {
+        stars.push(<img key={i} src={starFull} alt={rating}/>);
+      } else if(i === ratingWhole && (rating % 1) === 0) {
+        stars.push(<img key={i} src={starEmpty} alt={rating}/>)
+      } else if(i === ratingWhole && (i + 1) === ratingCeil) {
+        stars.push(StarVariable(ratingPercentage, i))
+      } else {
+        stars.push(<img key={i} src={starEmpty} alt={rating}/>);
+      }
+    }
+    return stars;
+  }
 
   // Platforms
   const getPlatform = (platform) => {
@@ -57,6 +81,7 @@ const GameDetail = ({ pathID }) => {
             <div className="rating">
               <motion.h3 layoutId={`title ${pathID}`}>{game.name}</motion.h3>
               <p>Rating: {game.rating}</p>
+              {getStars()}
             </div>
             <Info>
               <h3>Platforms</h3>
@@ -126,6 +151,11 @@ const Detail = styled(motion.div)`
 const Stats = styled(motion.div)`
   display: flex;
   justify-content: space-between;
+  .rating img, .rating svg {
+    width: 2rem;
+    height: 2rem;
+    display: inline;
+  }
 `;
 const Info = styled(motion.div)`
   text-align: center;

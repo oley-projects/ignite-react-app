@@ -73,7 +73,7 @@ const Home = () => {
 };
 
 const GameList = styled(motion.div)`
-  padding: 0 5rem;
+  padding: 0 5rem 5rem;
   h2 {
     padding: 5rem 0rem 5rem 2rem;
   }
