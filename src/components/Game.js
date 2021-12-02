@@ -1,4 +1,3 @@
-import { imageResize } from "../util";
 // Styling, Animation
 import styled from "styled-components";
 import { motion } from "framer-motion";
@@ -7,8 +6,10 @@ import { useDispatch } from "react-redux";
 import { loadDetail } from "../actions/detailAction";
 import { Link } from "react-router-dom";
 
+import { imageResize } from "../util";
+
 const Game = ({name, released, image, id}) => {
-  const stringPathid = id.toString();
+  const stringPathID = id.toString();
   // Load Details
   const dispatch = useDispatch();
   const loadDetailHandler = ()  => {
@@ -17,11 +18,13 @@ const Game = ({name, released, image, id}) => {
   };
   
   return (
-    <StyledGames layoutId={stringPathid} onClick={loadDetailHandler}>
+    <StyledGames layoutId={stringPathID} onClick={loadDetailHandler}>
       <Link to={`/game/${id}`} >
-      <motion.h3 layoutId={`title ${stringPathid}`}>{name}</motion.h3>
+      <motion.h3 layoutId={`title ${stringPathID}`}>{name}</motion.h3>
       <p>{released}</p>
-      <motion.img layoutId={`image ${stringPathid}`} src={imageResize(image, 640)} alt={name} />
+      {image && (
+        <motion.img layoutId={`image ${stringPathID}`} src={imageResize(image, 640)} alt={name} />
+      )}
       </Link>
     </StyledGames>
   );
