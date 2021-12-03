@@ -106,7 +106,7 @@ const GameDetail = ({ pathID }) => {
           </div>
           <div className="gallery">
             {screen.results.map(screenEl => (
-              <img src={screenEl.image} alt="screen" key={screenEl.id} />
+              <img src={imageResize(screenEl.image, 1280)} alt="screen" key={screenEl.id} />
             ))}
           </div>
         </Detail>
