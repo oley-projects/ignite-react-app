@@ -27,6 +27,7 @@ const GameDetail = ({ pathID }) => {
       navigate("/");
     }
   };
+  
   // Get Stars
   const getStars = () => {
     const stars = [];
