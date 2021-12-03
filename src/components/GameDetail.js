@@ -1,9 +1,10 @@
+import { useNavigate }  from "react-router-dom";
+import { useSelector } from "react-redux";
 import { imageResize } from "../util";
 // Styling, Animation
 import styled from "styled-components";
 import { motion } from "framer-motion";
-import { useNavigate }  from "react-router-dom";
-import { useSelector } from "react-redux";
+import { fadeInAnim } from "../animations";
 // Platform Images
 import apple from "../img/apple.svg"
 import nintendo from "../img/nintendo.svg"
@@ -76,7 +77,13 @@ const GameDetail = ({ pathID }) => {
   return (
     <>
     { !isLoading && (
-      <CardShadow className="shadow" onClick={exitDetailHandler}>
+      <CardShadow
+        variants={fadeInAnim}
+        initial="hidden"
+        animate="show"
+        className="shadow" 
+        onClick={exitDetailHandler}
+      >
         <Detail layoutId={pathID}>
           <Stats>
             <div className="rating">
